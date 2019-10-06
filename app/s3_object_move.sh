@@ -30,3 +30,17 @@ done
 
 printf "\n\n"
 echo "${s3Array[@]}"
+
+# Copy items from bucket1 to bucket2
+for item in "${s3Array[@]}" ; do
+  aws s3 cp s3://$bucket1/$item s3://$bucket2
+done
+
+# Displaying results
+echo "$bucket1 objects"
+aws s3 ls --summarize --human-readable --recursive s3://$bucket1
+printf "\n\n"
+
+echo "$bucket2 objects"
+aws s3 ls --summarize --human-readable --recursive s3://$bucket2
+printf "\n\n"
