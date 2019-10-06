@@ -3,7 +3,7 @@
 # Global variables
 bucket1="foo-test-python-script1"
 bucket2="foo-test-python-script2"
-threshold=2
+threshold=2 # in MiB
 
 # Command to grab all objects in bucket1
 awsCommand="aws s3 ls --summarize --human-readable --recursive s3://$bucket1"
@@ -16,3 +16,17 @@ while IFS= read -r line ; do
 done < <( $awsCommand | head -n -2 | grep MiB )
 
 echo "${fileArray[@]}"
+
+# Show all objects greater than or equal to threshold
+s3Array=()
+for i in "${fileArray[@]}" ; do
+  objectSize=$(echo $i | awk '{print $3}')
+  if [ $(echo "$objectSize>=$threshold" | bc) == 1 ] ;
+    then
+      file=$(echo $i | awk '{print $5}')
+      s3Array+=( "$file" )
+  fi
+done
+
+printf "\n\n"
+echo "${s3Array[@]}"
