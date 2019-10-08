@@ -49,6 +49,7 @@ Requirements:
 IAM Role attached to EC2 instance
   - Permission
     - AmazonS3FullAccess
+
 Linux with access to python 3.6
 
 The python-app directory contains two separate builds; unrounded and rounded, and a scripts directory. 
