@@ -11,9 +11,9 @@ s3Client = boto3.client("s3")
 
 # Set variables
 bucket1 = s3.Bucket(sys.argv[1])
+destinationBucket = s3.Bucket(sys.argv[2])
 threshold = sys.argv[3]
 sourceBucket = sys.argv[1]
-destinationBucket = s3.Bucket(sys.argv[2])
 
 # Check for objects over the specified threshold, move them to the destination bucket, and delete them from the source bucket
 # This is done in megabytes, unrounded. For a rounded version, please use the other python app, s3_move.py
