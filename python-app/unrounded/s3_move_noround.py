@@ -3,7 +3,6 @@
 # Import libraries
 import boto3
 import sys
-import math
 
 # Connect S3
 s3 = boto3.resource('s3')
