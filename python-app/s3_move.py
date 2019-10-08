@@ -26,4 +26,10 @@ for file in bucket1.objects.all():
         Key=file.key
     )
     print(fileSize['ContentLength'])
+    byteIn = file.size
+    megabyteFile = ((byteIn / 1024) / 1024)
+    if (megabyteFile >= int(threshold)):
+        print("This file", file.key, "is greater than", threshold,"megabytes.")
+    else:
+        print("This file", file.key, "is less than", threshold,"megabytes.")
 
