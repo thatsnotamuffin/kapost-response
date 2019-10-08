@@ -40,6 +40,6 @@ if [ $target == "run" ] ;
     fi
     
     # Start the docker container
-    docker run --name thatsnotamuffin s3-object-move $sourceBucket $destinationBucket $threshold
+    docker run --name thatsnotamuffin -d s3-object-move $sourceBucket $destinationBucket $threshold
 fi
 
