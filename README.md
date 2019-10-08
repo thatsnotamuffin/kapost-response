@@ -41,3 +41,18 @@ The app directory contains the necessary Dockerfile and s3_object_move.sh script
     - Creates an ec2-user directory in /home
     - Creates an app directory in /home/ec2-user
 
+Python - App Functionality 
+EC2 Environment: 
+AWS EC2 instance - Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type - ami-00eb20669e0990cb4
+
+Requirements:
+IAM Role attached to EC2 instance
+  - Permission
+    - AmazonS3FullAccess
+Linux with access to python 3.6
+
+The python-app directory contains two separate builds; unrounded and rounded, and a scripts directory. 
+
+The only difference between the unrounded and rounded builds is the way the threshold is interpreted. The AWS S3 GUI shows a rounded size, rounded to the first decimal point. The rounded build will move files of threshold or greater size as you would see in the S3 interface. Unrounded will move files that meet the threshold with no rounding. Some files that aren't moved may show as 2.0 in the S3 GUI, these files are not over 2.0 MB and fall short by some amount.
+
+The run_me.sh in the scripts directory will build an image or run a container. To use this script you need access to a Linux environment with /bin/bash access. An argument of run or build must be passed to the script. Afterwards you will be prompted to perform a build or run of the rounded or unrounded app. Performing a run will prompt for the source S3 bucket, destination S3 bucket, and threshold in MiB. 
